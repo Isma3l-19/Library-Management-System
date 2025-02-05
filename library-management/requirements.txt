@@ -1,0 +1,3 @@
+flask-sqlalchemy
+pymysql  # Alternative MySQL adapter
+mysql-connector-python
