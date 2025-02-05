@@ -4,6 +4,10 @@ from datetime import datetime
 
 app = Flask(__name__)
 
+@app.route("/")
+def index():
+    return 'Welcome'
+
 @app.route("/books", methods=["GET"])
 def get_books():
     books = Book.query.all()
