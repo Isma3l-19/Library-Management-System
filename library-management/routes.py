@@ -1,12 +1,13 @@
-from flask import Flask, request, jsonify
+from flask import Blueprint, request, jsonify
 from models import db, Book, Member, Transaction
 from datetime import datetime
 
-app = Flask(__name__)
+# Create a Blueprint
+app = Blueprint("routes", __name__)
 
 @app.route("/")
 def index():
-    return 'Welcome'
+    return "Welcome to Library Management System"
 
 @app.route("/books", methods=["GET"])
 def get_books():
