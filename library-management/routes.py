@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify, render_template, redirect, url_for, flash
 from models import db, Book, Member, Transaction
 from datetime import datetime
+from flask_login import login_required
 
 app = Blueprint("routes", __name__)
 
@@ -20,20 +21,21 @@ def members_page():
 
 # 📌 Route to show "Add Book" form
 @app.route("/add-book", methods=["GET", "POST"])
+@login_required
 def add_book():
+    # Only logged-in admins can access this
     if request.method == "POST":
         title = request.form["title"]
         author = request.form["author"]
         isbn = request.form["isbn"]
         category = request.form["category"]
-        
+
         new_book = Book(title=title, author=author, isbn=isbn, category=category)
         db.session.add(new_book)
         db.session.commit()
-        
         flash("Book added successfully!", "success")
         return redirect(url_for("routes.books_page"))
-    
+
     return render_template("add_book.html")
 
 # 📌 Route to show "Add Member" form
