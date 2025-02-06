@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Add Book - Library{% endblock %}
+
+{% block content %}
+    <h2 class="text-center">Add a New Book</h2>
+    <form action="{{ url_for('routes.add_book') }}" method="POST" class="w-50 mx-auto">
+        <div class="mb-3">
+            <label class="form-label">Title:</label>
+            <input type="text" class="form-control" name="title" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Author:</label>
+            <input type="text" class="form-control" name="author" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">ISBN:</label>
+            <input type="text" class="form-control" name="isbn" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Category:</label>
+            <input type="text" class="form-control" name="category">
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Add Book</button>
+    </form>
+{% endblock %}
