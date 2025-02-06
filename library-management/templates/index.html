@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Welcome to Library Management System</h1>
+    <nav>
+        <a href="{{ url_for('routes.books_page') }}">View Books</a> |
+        <a href="{{ url_for('routes.members_page') }}">View Members</a> |
+        <a href="{{ url_for('routes.borrow_page') }}">Borrow Book</a>
+    </nav>
+</body>
+</html>
