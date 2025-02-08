@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Add Book - Library{% endblock %}
+{% block title %}Add Book{% endblock %}
 
 {% block content %}
     <h2 class="text-center">Add a New Book</h2>
@@ -19,8 +19,16 @@
         </div>
         <div class="mb-3">
             <label class="form-label">Category:</label>
-            <input type="text" class="form-control" name="category">
+            <input type="text" class="form-control" name="category" required>
         </div>
-        <button type="submit" class="btn btn-primary w-100">Add Book</button>
+        <div class="mb-3">
+            <label class="form-label">Summary:</label>
+            <textarea class="form-control" name="summary" required></textarea>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Content URL (optional):</label>
+            <input type="url" class="form-control" name="content_url">
+        </div>
+        <button type="submit" class="btn btn-success w-100">Add Book</button>
     </form>
 {% endblock %}

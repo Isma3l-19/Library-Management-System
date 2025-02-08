@@ -100,10 +100,11 @@ def logout():
     return redirect(url_for("routes.index"))
 
 
-# 📌 View All Books
 @app.route("/books")
 def books_page():
     books = Book.query.all()
+    if not books:
+        flash("No books found!", "info")
     return render_template("books.html", books=books)
 
 
@@ -133,16 +134,15 @@ def add_book():
         isbn = request.form["isbn"]
         category = request.form["category"]
         summary = request.form["summary"]
-        content_url = request.form["content_url"]
+        content_url = request.form.get("content_url", None)
 
-        new_book = Book(title=title, author=author, isbn=isbn, category=category, summary=summary, content_url=content_url)
+        new_book = Book(title=title, author=author, isbn=isbn, category=category, summary=summary, content_url=content_url, status="Available")
         db.session.add(new_book)
         db.session.commit()
         flash("Book added successfully!", "success")
         return redirect(url_for("routes.books_page"))
 
     return render_template("add_book.html")
-
 
 # 📌 Add a Member (Admins Only)
 @app.route("/add-member", methods=["GET", "POST"])
