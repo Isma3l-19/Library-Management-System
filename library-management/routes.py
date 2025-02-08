@@ -16,7 +16,7 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 
-# 📌 Landing Page - Books by Category
+# Landing Page - Books by Category
 @app.route("/")
 def index():
     categories = db.session.query(Book.category).distinct().all()
@@ -24,7 +24,7 @@ def index():
     return render_template("index.html", books_by_category=books_by_category)
 
 
-# 📌 View Book Details (Public)
+# View Book Details (Public)
 @app.route("/book/<int:book_id>")
 def view_book(book_id):
     book = Book.query.get(book_id)
@@ -35,7 +35,7 @@ def view_book(book_id):
     return render_template("book.html", book=book)
 
 
-# 📌 Read Full Book (Login Required)
+# Read Full Book (Login Required)
 @app.route("/read/<int:book_id>")
 @login_required
 def read_book(book_id):
@@ -47,7 +47,7 @@ def read_book(book_id):
     return render_template("read_book.html", book=book)
 
 
-# 📌 User Login
+# User Login
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
@@ -65,7 +65,7 @@ def login():
     return render_template("login.html")
 
 
-# 📌 User Signup
+# User Signup
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
     if request.method == "POST":
@@ -91,7 +91,7 @@ def signup():
     return render_template("signup.html")
 
 
-# 📌 Logout
+# Logout
 @app.route("/logout")
 @login_required
 def logout():
@@ -108,7 +108,7 @@ def books_page():
     return render_template("books.html", books=books)
 
 
-# 📌 View All Members (Admins Only)
+# View All Members (Admins Only)
 @app.route("/members")
 @login_required
 def members_page():
@@ -120,7 +120,7 @@ def members_page():
     return render_template("members.html", members=members)
 
 
-# 📌 Add a Book (Admins Only)
+# Add a Book (Admins Only)
 @app.route("/add-book", methods=["GET", "POST"])
 @login_required
 def add_book():
@@ -144,7 +144,7 @@ def add_book():
 
     return render_template("add_book.html")
 
-# 📌 Add a Member (Admins Only)
+# Add a Member (Admins Only)
 @app.route("/add-member", methods=["GET", "POST"])
 @login_required
 def add_member():
@@ -166,7 +166,7 @@ def add_member():
     return render_template("add_member.html")
 
 
-# 📌 Borrow a Book (Login Required)
+# Borrow a Book (Login Required)
 @app.route("/borrow", methods=["GET", "POST"])
 @login_required
 def borrow_page():
@@ -193,7 +193,7 @@ def borrow_page():
     return render_template("borrow.html", books=books, members=members)
 
 
-# 📌 Return a Book (Login Required)
+# Return a Book (Login Required)
 @app.route("/return", methods=["GET", "POST"])
 @login_required
 def return_page():
