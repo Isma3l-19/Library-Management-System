@@ -1,8 +1,25 @@
 {% extends "base.html" %}
 
-{% block title %}Home - Library{% endblock %}
+{% block title %}Library - Home{% endblock %}
 
 {% block content %}
-    <h2>Welcome to the Library Management System</h2>
-    <p>Use the navigation above to manage books and members.</p>
+    <h2 class="text-center">Explore Books by Category</h2>
+
+    {% for category, books in books_by_category.items() %}
+        <h3>{{ category }}</h3>
+        <div class="row">
+            {% for book in books %}
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ book.title }}</h5>
+                            <p class="card-text"><strong>Author:</strong> {{ book.author }}</p>
+                            <p class="card-text">{{ book.summary[:100] }}...</p>
+                            <a href="{{ url_for('routes.view_book', book_id=book.id) }}" class="btn btn-primary">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
 {% endblock %}

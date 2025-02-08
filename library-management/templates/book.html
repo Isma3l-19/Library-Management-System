@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}{{ book.title }}{% endblock %}
+
+{% block content %}
+    <h2>{{ book.title }}</h2>
+    <p><strong>Author:</strong> {{ book.author }}</p>
+    <p><strong>Category:</strong> {{ book.category }}</p>
+    <p>{{ book.summary }}</p>
+
+    {% if current_user.is_authenticated %}
+        <a href="{{ url_for('routes.read_book', book_id=book.id) }}" class="btn btn-success">Read Full Book</a>
+    {% else %}
+        <p class="text-danger">Login to read the full book.</p>
+        <a href="{{ url_for('routes.login') }}" class="btn btn-primary">Login</a>
+        <a href="{{ url_for('routes.signup') }}" class="btn btn-secondary">Sign Up</a>
+    {% endif %}
+{% endblock %}
