@@ -1,6 +1,6 @@
 flask-sqlalchemy
-pymysql  # Alternative MySQL adapter
-mysql-connector-python
+pymysql
+mysql-connector-python  # Alternative MySQL adapter
 flask-login
 flask-bcrypt
 

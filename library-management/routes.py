@@ -139,7 +139,7 @@ def add_book():
         new_book = Book(title=title, author=author, isbn=isbn, category=category, summary=summary, content_url=content_url, status="Available")
         db.session.add(new_book)
         db.session.commit()
-        flash("Book added successfully!", "success")
+        flash("✅ Book added successfully!", "success")
         return redirect(url_for("routes.books_page"))
 
     return render_template("add_book.html")
@@ -160,11 +160,10 @@ def add_member():
         new_member = Member(name=name, email=email, phone=phone)
         db.session.add(new_member)
         db.session.commit()
-        flash("Member added successfully!", "success")
+        flash("✅ Member added successfully!", "success")
         return redirect(url_for("routes.members_page"))
 
     return render_template("add_member.html")
-
 
 # Borrow a Book (Login Required)
 @app.route("/borrow", methods=["GET", "POST"])
