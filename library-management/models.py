@@ -20,9 +20,10 @@ class Book(db.Model):
     author = db.Column(db.String(255), nullable=False)
     isbn = db.Column(db.String(20), unique=True, nullable=False)
     category = db.Column(db.String(100))
-    summary = db.Column(db.Text, nullable=True)  # Allowing NULL values
-    content_url = db.Column(db.String(255), nullable=True)  # Allowing NULL values
+    summary = db.Column(db.Text, nullable=True)
+    pdf_file = db.Column(db.LargeBinary, nullable=True)  # Store PDF as BLOB
     status = db.Column(db.String(20), default="Available")  # New field added
+
 
 
 class Member(db.Model):

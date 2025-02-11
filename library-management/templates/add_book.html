@@ -4,31 +4,38 @@
 
 {% block content %}
     <h2 class="text-center">Add a New Book</h2>
-    <form action="{{ url_for('routes.add_book') }}" method="POST" class="w-50 mx-auto">
+
+    <form action="{{ url_for('routes.add_book') }}" method="POST" enctype="multipart/form-data" class="w-50 mx-auto">
         <div class="mb-3">
             <label class="form-label">Title:</label>
             <input type="text" class="form-control" name="title" required>
         </div>
+
         <div class="mb-3">
             <label class="form-label">Author:</label>
             <input type="text" class="form-control" name="author" required>
         </div>
+
         <div class="mb-3">
             <label class="form-label">ISBN:</label>
             <input type="text" class="form-control" name="isbn" required>
         </div>
+
         <div class="mb-3">
             <label class="form-label">Category:</label>
             <input type="text" class="form-control" name="category" required>
         </div>
+
         <div class="mb-3">
             <label class="form-label">Summary:</label>
             <textarea class="form-control" name="summary" required></textarea>
         </div>
+
         <div class="mb-3">
-            <label class="form-label">Content URL (optional):</label>
-            <input type="url" class="form-control" name="content_url">
+            <label class="form-label">Upload Book (PDF):</label>
+            <input type="file" class="form-control" name="book_file" accept=".pdf" required>
         </div>
+
         <button type="submit" class="btn btn-success w-100">Add Book</button>
     </form>
 {% endblock %}

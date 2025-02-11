@@ -1,8 +1,9 @@
-from flask import Blueprint, request, jsonify, render_template, redirect, url_for, flash
+from flask import Blueprint, request, jsonify, render_template, redirect, url_for, flash, send_file
 from flask_login import login_required, LoginManager, login_user, logout_user, current_user
 from flask_bcrypt import Bcrypt
 from models import db, Book, Member, Transaction, User
 from datetime import datetime
+import io
 
 app = Blueprint("routes", __name__)
 bcrypt = Bcrypt()
@@ -40,11 +41,16 @@ def view_book(book_id):
 @login_required
 def read_book(book_id):
     book = Book.query.get(book_id)
-    if not book:
-        flash("Book not found!", "danger")
+    if not book or not book.pdf_file:
+        flash("Book not found or no PDF available!", "danger")
         return redirect(url_for("routes.index"))
 
-    return render_template("read_book.html", book=book)
+    return send_file(
+        io.BytesIO(book.pdf_file),
+        mimetype="application/pdf",
+        as_attachment=False,
+        download_name=f"{book.title}.pdf"
+    )
 
 
 # User Login
@@ -124,23 +130,29 @@ def members_page():
 @app.route("/add-book", methods=["GET", "POST"])
 @login_required
 def add_book():
-    if current_user.role != "admin":
-        flash("Access denied! Only admins can add books.", "danger")
-        return redirect(url_for("routes.index"))
-
     if request.method == "POST":
         title = request.form["title"]
         author = request.form["author"]
         isbn = request.form["isbn"]
         category = request.form["category"]
         summary = request.form["summary"]
-        content_url = request.form.get("content_url", None)
 
-        new_book = Book(title=title, author=author, isbn=isbn, category=category, summary=summary, content_url=content_url, status="Available")
-        db.session.add(new_book)
-        db.session.commit()
-        flash("✅ Book added successfully!", "success")
-        return redirect(url_for("routes.books_page"))
+        file = request.files["book_file"]
+        if file:
+            pdf_data = file.read()  # Read the PDF file as binary data
+
+            new_book = Book(
+                title=title,
+                author=author,
+                isbn=isbn,
+                category=category,
+                summary=summary,
+                pdf_file=pdf_data  # Store file in DB
+            )
+            db.session.add(new_book)
+            db.session.commit()
+            flash("✅ Book added successfully!", "success")
+            return redirect(url_for("routes.books_page"))
 
     return render_template("add_book.html")
 

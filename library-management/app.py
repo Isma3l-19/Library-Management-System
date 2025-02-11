@@ -5,12 +5,14 @@ from flask_bcrypt import Bcrypt
 from config import Config
 from models import db, User
 from routes import app as routes_app
+from flask_migrate import Migrate
 
 app = Flask(__name__)
 app.config.from_object(Config)
 
 # Initialize Extensions
 db.init_app(app)
+migrate = Migrate(app, db)
 bcrypt = Bcrypt(app)
 login_manager = LoginManager()
 login_manager.init_app(app)

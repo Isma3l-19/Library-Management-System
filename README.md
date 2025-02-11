@@ -1,5 +1,6 @@
 # Library-Management-System
 Library management system.
+
 ## Features
 - Add, update, and delete books
 - Search for books by title, author, or ISBN
@@ -16,7 +17,20 @@ Library management system.
     ```bash
     cd Library-Management-System
     ```
-3. Install dependencies:
+3. Create a virtual environment:
+    ```bash
+    python -m venv venv
+    ```
+4. Activate the virtual environment:
+    - On Windows:
+        ```bash
+        venv\Scripts\activate
+        ```
+    - On macOS/Linux:
+        ```bash
+        source venv/bin/activate
+        ```
+5. Install dependencies:
     ```bash
     npm install
     ```
@@ -24,7 +38,7 @@ Library management system.
 ## Usage
 1. Start the development server:
     ```bash
-    npm start
+    flask run
     ```
 2. Open your browser and go to `http://localhost:5000`
 
