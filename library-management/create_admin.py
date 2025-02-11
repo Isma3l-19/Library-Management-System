@@ -16,11 +16,11 @@ bcrypt = Bcrypt(app)
 db.init_app(app)
 
 with app.app_context():
-    username = "admin"
-    password = "admin123"  # Change this to a secure password
+    username = "ADMIN"
+    password = "12345"  # Change this to a secure password
     hashed_password = bcrypt.generate_password_hash(password).decode("utf-8")
     
     new_admin = Admin(username=username, password=hashed_password)
     db.session.add(new_admin)
     db.session.commit()
-    print("✅ Admin Created: Use 'admin' / 'admin123' to login")
+    print("✅ Admin Created")
