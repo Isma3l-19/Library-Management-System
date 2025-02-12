@@ -6,7 +6,6 @@ Library management system.
 - Search for books by title, author, or ISBN
 - User authentication and authorization
 - Borrow and return books
-- Track overdue books and fines
 
 ## Installation
 1. Clone the repository:
