@@ -1,5 +1,5 @@
 import os
-from models import db, User  # Use User model
+from models import db, User
 from flask_bcrypt import Bcrypt
 from flask import Flask
 from dotenv import load_dotenv

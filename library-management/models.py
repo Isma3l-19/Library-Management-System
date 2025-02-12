@@ -21,8 +21,8 @@ class Book(db.Model):
     isbn = db.Column(db.String(20), unique=True, nullable=False)
     category = db.Column(db.String(100))
     summary = db.Column(db.Text, nullable=True)
-    pdf_file = db.Column(db.LargeBinary, nullable=True)  # Store PDF as BLOB
-    status = db.Column(db.String(20), default="Available")  # New field added
+    pdf_file = db.Column(db.LargeBinary(length=(2**32)-1), nullable=True)  # Storing the PDF file as blob using LONGBLOB
+    status = db.Column(db.String(20), default="Available")
 
 
 
